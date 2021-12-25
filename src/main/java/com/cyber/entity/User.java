@@ -7,7 +7,6 @@ import lombok.Setter;
 import org.hibernate.annotations.Where;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @Getter
@@ -20,17 +19,15 @@ public class User extends BaseEntity{
     private String firstName;
     private String lastName;
     private String userName;
-    //private String passWord;
+    private String passWord;
     private boolean enabled;
     private String phone;
 
     //many roles can be assigned to one user
-    @ManyToOne(fetch = FetchType.LAZY)
+    @ManyToOne //not @Lazy, @Eager !!
     @JoinColumn(name = "role_id")
     private Role role;
 
     @Enumerated(EnumType.STRING)
     private Gender gender;
-
-
 }
