@@ -11,6 +11,7 @@ import com.cyber.service.ProjectService;
 import com.cyber.service.TaskService;
 import com.cyber.service.UserService;
 import org.springframework.context.annotation.Lazy;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -84,7 +85,9 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Override
     public List<ProjectDTO> listAllProjectDetails() {
-        UserDTO currentUserDTO = userService.findByUserName("deniz.salmazs@gmail.com");
+        //in header.html -- sec:authentication="name" -- getName() comes from here
+        String username = SecurityContextHolder.getContext().getAuthentication().getName();
+        UserDTO currentUserDTO = userService.findByUserName(username);
         User user = mapperUtil.convert(currentUserDTO,new User());
         List<Project> list = projectRepository.findAllByAssignedManager(user);
 

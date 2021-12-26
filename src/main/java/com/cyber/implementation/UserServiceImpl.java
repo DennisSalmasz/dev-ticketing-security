@@ -51,7 +51,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void save(UserDTO dto) {
-        User foundUser = userRepository.findByUserName(dto.getUserName());
+        //User foundUser = userRepository.findByUserName(dto.getUserName());
         dto.setEnabled(true); //this is for confirming login - a separate process!!
 
         //encode password, before saving in DB
